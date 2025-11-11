@@ -1,19 +1,44 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Shop - Demo E-commerce</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shop | Demo E-commerce</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
   <style>
-    .card img { height: 200px; object-fit: cover; }
-    .card:hover { transform: translateY(-5px); transition: 0.3s; }
-    .filters select { margin-bottom: 1rem; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #fff;
+    }
+
+    .sidebar {
+      width: 250px;
+      border-right: 1px solid #ddd;
+      padding: 20px;
+    }
+
+    .shop-content {
+      flex-grow: 1;
+      padding: 20px;
+    }
+
+    .product-card {
+      transition: transform 0.2s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .rating i {
+      color: gold;
+    }
   </style>
 </head>
+
 <body>
-  <!-- Navbar -->
+  <!-- Top banner + navbar (same) -->
   <div class="bg-primary text-white text-center py-2">
     Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%!
     <a href="#" class="text-white text-decoration-underline">Shop Now</a>
@@ -21,65 +46,69 @@
 
   <nav class="navbar navbar-expand-lg bg-light border-bottom">
     <div class="container">
-      <a class="navbar-brand" href="index.html">E-commerce</a>
+      <a class="navbar-brand fw-bold" href="index.html">E-commerce</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navMain">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link active" href="shop.html">Shop</a></li>
+          <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
           <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
           <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
         </ul>
+
+        <form class="d-flex me-3" action="#" method="GET">
+          <input class="form-control me-2" type="search" name="q" placeholder="What are you looking for?">
+          <button class="btn btn-outline-dark" type="submit">Search</button>
+        </form>
+
         <div class="d-flex align-items-center">
-          <a id="cartLink" class="me-3" href="cart.html"><i class="bi bi-cart"></i> Cart <span id="cartCount" class="badge bg-danger">0</span></a>
-          <a id="loginBtn" class="btn btn-light btn-sm me-2" href="login.html">Log in</a>
-          <a id="logoutBtn" class="btn btn-danger btn-sm" href="#">Log out</a>
-          <span id="usernameDisplay" class="ms-2 fw-bold"></span>
+          <a href="./details.html"><img src="user.png" alt="userIcon" width="20" height="20"></a>
+          <span id="usernameDisplay" class="fw-bold me-2"></span>
+          <a id="signupBtn" class="btn btn-primary btn-sm me-2" href="signup.html">Sign up</a>
+          <button id="logoutBtn" class="btn btn-danger btn-sm">Log out</button>
         </div>
       </div>
     </div>
   </nav>
 
-  <!-- Shop Filters -->
-  <div class="container py-4 filters">
-    <div class="row g-3">
-      <div class="col-md-3">
-        <label>Categories</label>
-        <select class="form-select" id="categoryFilter">
-          <option value="all">All</option>
-          <option value="phone">Phone</option>
-          <option value="tablet">Tablet</option>
-          <option value="laptop">Laptop</option>
-          <option value="accessory">Accessory</option>
+  <main class="container-fluid py-4">
+    <div class="d-flex">
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h5 class="fw-bold mb-3">Filter by Category</h5>
+        <select id="categorySelect" class="form-select">
+          <option value="">All Categories</option>
         </select>
+
+        <h5 class="fw-bold mt-4 mb-3">Filter by Rating</h5>
+        <div id="ratingFilter">
+          <select id="ratingSelect" class="form-select">
+            <option value="">All Ratings</option>
+            <option value="5">★★★★★</option>
+            <option value="4">★★★★☆</option>
+            <option value="3">★★★☆☆</option>
+            <option value="2">★★☆☆☆</option>
+            <option value="1">★☆☆☆☆</option>
+          </select>
+        </div>
       </div>
-      <div class="col-md-3">
-        <label>Rating</label>
-        <select class="form-select" id="ratingFilter">
-          <option value="all">All</option>
-          <option value="5">5 ★</option>
-          <option value="4">4 ★ & above</option>
-          <option value="3">3 ★ & above</option>
-        </select>
-      </div>
-      <div class="col-md-3">
-        <label>Sort By</label>
-        <select class="form-select" id="sortBy">
-          <option value="default">Default</option>
-          <option value="priceLow">Price: Low → High</option>
-          <option value="priceHigh">Price: High → Low</option>
-        </select>
+
+      <!-- Main shop content -->
+      <div class="shop-content w-100">
+        <div class="d-flex justify-content-between mb-4">
+          <input type="text" id="search" class="form-control w-50" placeholder="Search products...">
+          <select id="sort" class="form-select w-25">
+            <option value="">Sort by</option>
+            <option value="low">Price: Low to High</option>
+            <option value="high">Price: High to Low</option>
+          </select>
+        </div>
+        <div class="row" id="productList"></div>
       </div>
     </div>
-  </div>
-
-  <!-- Products -->
-  <div class="container py-4">
-    <div class="row g-4" id="productContainer"></div>
-  </div>
-
+  </main>
   <!-- Footer (common for all pages) -->
   <footer class="mt-5 text-white bg-dark">
     <div class="container py-5">
@@ -143,94 +172,152 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- global helpers -->
+  <script src="./script.js"></script>
+
   <script>
-    // Login/logout
-    const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
-    const loginBtn = document.getElementById("loginBtn");
-    const logoutBtn = document.getElementById("logoutBtn");
-    const usernameDisplay = document.getElementById("usernameDisplay");
-    if(loggedInUser){
-      loginBtn.style.display = "none";
-      logoutBtn.style.display = "inline-block";
-      usernameDisplay.textContent = loggedInUser.username;
-    } else {
-      loginBtn.style.display = "inline-block";
-      logoutBtn.style.display = "none";
-      usernameDisplay.textContent = "";
-    }
-    logoutBtn.addEventListener("click", ()=>{
-      localStorage.removeItem("loggedInUser");
+    // navbar login-state init
+    window.initNavbar && initNavbar();
+
+    if (localStorage.getItem("shopRefresh") === "true") {
+      localStorage.removeItem("shopRefresh");
       location.reload();
-    });
+    }
 
-    // Cart
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    document.getElementById("cartCount").textContent = cart.length;
+    const categorySelect = document.getElementById("categorySelect");
+    const ratingSelect = document.getElementById("ratingSelect");
+    const searchInput = document.getElementById("search");
+    const sortSelect = document.getElementById("sort");
+    const productList = document.getElementById("productList");
 
-    // Products
-    const products = [
-      {id:1,name:"iPhone 15",price:1200,image:"https://www.iphoned.nl/wp-content/uploads/2023/08/iphone-15-pro-max-alle-kleuren.jpg",description:"Newest iPhone.",category:"phone",rating:5},
-      {id:2,name:"iPad Pro",price:999,image:"https://wi-fiplanet.com/wp-content/uploads/2025/10/ipad-pro-m5.webp",description:"Powerful tablet.",category:"tablet",rating:4},
-      {id:3,name:"Samsung Galaxy S24",price:899,image:"https://cdn.mos.cms.futurecdn.net/FRnWTX2nKVRbabrmymdbhm.jpg",description:"High-end Android.",category:"phone",rating:4},
-      {id:4,name:"Macbook Pro",price:2300,image:"https://images.unsplash.com/photo-1517336714731-489689fd1ca8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",description:"Professional laptop.",category:"laptop",rating:5},
-      {id:5,name:"Wireless Earbuds",price:120,image:"https://tse3.mm.bing.net/th/id/OIP.OiiHM9l9nMP4lFpG9vbvBwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3",description:"High quality sound.",category:"accessory",rating:4}
+    let products = [];
+    let activeCategory = "";
+    let activeRating = "";
+
+    // fallback ürünler (API boşsa)
+    const fallbackProducts = [
+      { id: 1, brand: "Asus", model: "ROG Strix G16", price: 2229.99, imageUrl: "https://th.bing.com/th/id/OIP.WFErKkuWBk7qsHUe2wZxfgHaE0?w=308&h=200&c=7&r=0&o=7", categoryId: 1, averageRating: 4.5 },
+      { id: 2, brand: "Apple", model: "iPhone 15 Pro", price: 1199.00, imageUrl: "https://tse3.mm.bing.net/th/id/OIP.NLNPcMejbgiahfXP72mN3AHaHa?cb=ucfimgc2&w=1280", categoryId: 6, averageRating: 5 },
+      { id: 3, brand: "Samsung", model: "Galaxy Tab S9", price: 799.00, imageUrl: "https://th.bing.com/th/id/OIP.Kol3s_lmvLO9zH1kofN3YgHaEK?w=283&h=180", categoryId: 7, averageRating: 4 }
     ];
 
-    const productContainer = document.getElementById("productContainer");
-    const categoryFilter = document.getElementById("categoryFilter");
-    const ratingFilter = document.getElementById("ratingFilter");
-    const sortBy = document.getElementById("sortBy");
+    // 🔹 Kategorileri yükle
+    async function loadCategories() {
+      try {
+        const res = await fetch("http://195.26.245.5:9505/api/categories");
+        if (!res.ok) throw new Error("No categories");
+        const data = await res.json();
+        data.forEach(cat => {
+          const opt = document.createElement("option");
+          opt.value = cat.id;
+          opt.textContent = cat.name;
+          categorySelect.appendChild(opt);
+        });
+      } catch (err) {
+        console.warn("Kategori API hatası — fallback kullanılıyor.");
+        const fallback = [
+          { id: 1, name: "Laptops" }, { id: 2, name: "Gaming" }, { id: 3, name: "Accessories" },
+          { id: 4, name: "Electronics" }, { id: 5, name: "Audio" }, { id: 6, name: "Phones" },
+          { id: 7, name: "Tablets" }, { id: 8, name: "TV" }, { id: 9, name: "SmartPhones" },
+          { id: 10, name: "HeadPhones" }, { id: 11, name: "Personal Computers" }
+        ];
+        fallback.forEach(cat => {
+          const opt = document.createElement("option");
+          opt.value = cat.id;
+          opt.textContent = cat.name;
+          categorySelect.appendChild(opt);
+        });
+      }
+    }
 
-    function displayProducts(){
-      let filtered = [...products];
+    // 🔹 Ürünleri getir
+    async function fetchProducts() {
+      const token = window.getToken ? window.getToken() : null;
+      try {
+        const headers = token ? { "Authorization": `Bearer ${token}` } : {};
+        const res = await fetch("http://195.26.245.5:9505/api/products", { headers });
+        if (!res.ok) throw new Error("API error");
+        const data = await res.json();
+        products = Array.isArray(data) ? data : (data.content || fallbackProducts);
+        localStorage.setItem("allProducts", JSON.stringify(products)); // product.html için
+      } catch (err) {
+        console.warn("API boş veya hata — cache/fallback kullanılıyor.", err);
+        products = JSON.parse(localStorage.getItem("cachedProducts") || "[]");
+        if (!products.length) products = fallbackProducts;
+      }
+      renderProducts();
+    }
 
-      // Category filter
-      const catVal = categoryFilter.value;
-      if(catVal !== "all") filtered = filtered.filter(p=>p.category===catVal);
+    // 🔹 Ürünleri filtrele, sırala ve göster
+    function renderProducts() {
+      const searchVal = searchInput.value.trim().toLowerCase();
+      const sortVal = sortSelect.value;
 
-      // Rating filter
-      const rateVal = ratingFilter.value;
-      if(rateVal !== "all") filtered = filtered.filter(p=>p.rating >= parseInt(rateVal));
+      let filtered = products.filter(p => (p.brand + " " + (p.model || "")).toLowerCase().includes(searchVal));
 
-      // Sort
-      const sortVal = sortBy.value;
-      if(sortVal==="priceLow") filtered.sort((a,b)=>a.price-b.price);
-      else if(sortVal==="priceHigh") filtered.sort((a,b)=>b.price-a.price);
+      if (activeCategory) filtered = filtered.filter(p => String(p.categoryId) === String(activeCategory));
+      if (activeRating) filtered = filtered.filter(p => Math.round(p.averageRating || 0) == activeRating);
 
-      // Render
-      productContainer.innerHTML = "";
-      filtered.forEach(p=>{
-        const col = document.createElement("div");
-        col.className = "col-md-3";
-        col.innerHTML = `
-          <div class="card text-center">
-            <img src="${p.image}" class="card-img-top" alt="${p.name}">
+      if (sortVal === "low") filtered.sort((a, b) => a.price - b.price);
+      if (sortVal === "high") filtered.sort((a, b) => b.price - a.price);
+
+      productList.innerHTML = "";
+      if (!filtered.length) {
+        productList.innerHTML = `<p class="text-center text-muted">No products found.</p>`;
+        return;
+      }
+
+      filtered.forEach(p => {
+        const stars = "★".repeat(Math.round(p.averageRating || 0)) + "☆".repeat(5 - Math.round(p.averageRating || 0));
+        productList.innerHTML += `
+        <div class="col-md-3 mb-4">
+          <div class="card h-100 shadow-sm product-card">
+            <img src="${p.imageUrl || 'https://via.placeholder.com/300'}" class="card-img-top" alt="${p.brand}">
             <div class="card-body">
-              <h5>${p.name}</h5>
-              <p class="small text-muted">${p.description}</p>
-              <p class="fw-bold">$${p.price}</p>
-              <a href="product.html?id=${p.id}" class="btn btn-outline-dark btn-sm mb-2">View</a>
-              <button class="btn btn-primary btn-sm addCartBtn">Add to Cart</button>
+              <h6 class="card-title">${p.brand} ${p.model || ''}</h6>
+              <p class="text-muted mb-1">${(p.price || 0).toFixed(2)} AZN</p>
+              <div class="rating mb-2">${stars}</div>
+              <button class="btn btn-outline-primary w-100" onclick="viewDetails(${p.id})">View Details</button>
+              <button class="btn btn-success w-100 mt-2" onclick="addToCart(${p.id})">Add to Cart</button>
             </div>
           </div>
-        `;
-        productContainer.appendChild(col);
-
-        col.querySelector(".addCartBtn").addEventListener("click", ()=>{
-          const cart = JSON.parse(localStorage.getItem("cart")) || [];
-          cart.push(p);
-          localStorage.setItem("cart", JSON.stringify(cart));
-          document.getElementById("cartCount").textContent = cart.length;
-          alert(`${p.name} added to cart!`);
-        });
+        </div>`;
       });
     }
 
-    categoryFilter.addEventListener("change", displayProducts);
-    ratingFilter.addEventListener("change", displayProducts);
-    sortBy.addEventListener("change", displayProducts);
+    // 🔹 Detay sayfasına yönlendir
+    function viewDetails(id) {
+      window.location.href = `product.html?id=${id}`;
+    }
 
-    displayProducts();
+    // 🔹 Sepete ekleme fonksiyonu
+    function addToCart(id) {
+      const product = products.find(p => p.id === id);
+      if (!product) return alert("Product not found!");
+
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const existing = cart.find(p => p.id === id);
+
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cart.push({ ...product, quantity: 1 });
+      }
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert(`${product.brand} ${product.model} added to cart!`);
+    }
+
+    // 🔹 Filtreleme eventleri
+    searchInput.addEventListener("input", renderProducts);
+    sortSelect.addEventListener("change", renderProducts);
+    categorySelect.addEventListener("change", e => { activeCategory = e.target.value; renderProducts(); });
+    ratingSelect.addEventListener("change", e => { activeRating = e.target.value; renderProducts(); });
+
+    // 🔹 Başlat
+    loadCategories().then(fetchProducts);
   </script>
 </body>
+
 </html>

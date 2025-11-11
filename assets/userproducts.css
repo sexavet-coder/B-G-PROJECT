@@ -1,0 +1,55 @@
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+}
+
+th,
+td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+button:disabled {
+    opacity: 0.5;
+}
+
+table .edit-btn {
+    padding: 3px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #0D6EFD;
+    color: white;
+}
+
+table .delete-btn {
+    padding: 3px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: red;
+    color: white;
+}
+
+.btn-groups {
+    margin-top: 20px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-groups button {
+    padding: 5px 15px;
+    /* background-color: rgb(204, 58, 58); */
+    background-color: gray;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 15px;
+}

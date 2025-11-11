@@ -1,55 +1,75 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>User Details - Demo E-commerce</title>
+  <title>Product Details | Demo E-commerce</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="details.css">
 </head>
+
 <body>
-  <!-- Navbar -->
+
+  <!-- Top Banner -->
   <div class="bg-primary text-white text-center py-2">
     Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%!
     <a href="#" class="text-white text-decoration-underline">Shop Now</a>
   </div>
 
+  <!-- Navbar -->
   <nav class="navbar navbar-expand-lg bg-light border-bottom">
     <div class="container">
-      <a class="navbar-brand" href="index.html">E-commerce</a>
+      <a class="navbar-brand fw-bold" href="index.html">E-commerce</a>
+
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
         <span class="navbar-toggler-icon"></span>
       </button>
+
       <div class="collapse navbar-collapse" id="navMain">
+        <!-- Sol Menü -->
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
           <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
           <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
         </ul>
+
+        <!-- Arama -->
+        <form class="d-flex me-3" action="#" method="GET">
+          <input class="form-control me-2" type="search" name="q" placeholder="What are you looking for?">
+          <button class="btn btn-outline-dark" type="submit">Search</button>
+        </form>
+
+        <!-- Sağ Kısım -->
         <div class="d-flex align-items-center">
-          <a id="cartLink" class="me-3" href="cart.html"><i class="bi bi-cart"></i> Cart <span id="cartCount" class="badge bg-danger">0</span></a>
-          <a id="loginBtn" class="btn btn-light btn-sm me-2" href="login.html">Log in</a>
-          <a id="logoutBtn" class="btn btn-danger btn-sm" href="#">Log out</a>
-          <span id="usernameDisplay" class="ms-2 fw-bold"></span>
+          <a id="cartLink" class="me-3" href="cart.html">
+            <i class="bi bi-cart"></i> Cart
+            <span id="cartCount" class="badge bg-danger">0</span>
+          </a>
+
+          <!-- Dinamik Butonlar -->
+          <!-- <a id="loginBtn" class="btn btn-outline-primary btn-sm me-2" href="login.html">Log in</a> -->
+          <a href="./details.html"><img src="user.png" alt="userIcon" width="20" height="20"></a>
+          <span id="usernameDisplay" class="fw-bold me-2"></span>
+          <a id="signupBtn" class="btn btn-primary btn-sm me-2" href="signup.html">Sign up</a>
+          <button id="logoutBtn" class="btn btn-danger btn-sm">Log out</button>
         </div>
       </div>
     </div>
   </nav>
 
-  <!-- User Details -->
-  <div class="container py-5">
-    <h2 class="mb-4 text-center">My Account</h2>
-    <div class="card p-4 mb-4">
-      <h5>Username: <span id="userName"></span></h5>
-      <h5>Email: <span id="userEmail"></span></h5>
-      <h5>Password: <span id="userPassword"></span></h5>
+  <main class="container py-5">
+    <button class="btn btn-outline-secondary mb-4" onclick="goMyProductsPage()">My Products for sale</button>
+    <div id="userDetails" class="bg-danger p-4 text-white rounded">
+      <h3 class="fw-bold bg-light text-primary rounded">User Details</h3>
+      <p><b>Name:</b><span id="name"></span></p>
+      <p><b>Surname:</b><span id="surname"></span></p>
+      <p><b>Username:</b><span id="username"></span></p>
+      <p><b>Email:</b><span id="email"></span></p>
     </div>
-    <div class="text-center">
-      <a href="userproducts.html" class="btn btn-primary">My Products for Sale</a>
-      <a href="createproduct.html" class="btn btn-success ms-2">Create Product</a>
-    </div>
-  </div>
+
+  </main>
 
   <!-- Footer (common for all pages) -->
   <footer class="mt-5 text-white bg-dark">
@@ -113,37 +133,36 @@
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="./script.js"></script>
   <script>
-    // Login/logout
-    const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
-    const loginBtn = document.getElementById("loginBtn");
-    const logoutBtn = document.getElementById("logoutBtn");
-    const usernameDisplay = document.getElementById("usernameDisplay");
-    if(loggedInUser){
-      loginBtn.style.display = "none";
-      logoutBtn.style.display = "inline-block";
-      usernameDisplay.textContent = loggedInUser.username;
+    window.initNavbar && initNavbar();
+    const body = JSON.parse(localStorage.getItem("token"));
+    const token = body.token;
 
-      document.getElementById("userName").textContent = loggedInUser.username;
-      document.getElementById("userEmail").textContent = loggedInUser.email;
-      document.getElementById("userPassword").textContent = loggedInUser.password;
-    } else {
-      loginBtn.style.display = "inline-block";
-      logoutBtn.style.display = "none";
-      usernameDisplay.textContent = "";
-      alert("Please login first!");
-      location.href = "login.html";
+    fetch('http://195.26.245.5:9505/api/clients/get-details', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+      .then(response => {
+        return response.json()
+      })
+      .then(data => {
+        console.log(data);
+
+        document.getElementById('name').textContent = data.name;
+        document.getElementById('surname').textContent = data.surname;
+        document.getElementById('username').textContent = data.username;
+        document.getElementById('email').textContent = data.email;
+      });
+
+    function goMyProductsPage() {
+      window.location.href = 'userproducts.html';
     }
-
-    logoutBtn.addEventListener("click", ()=>{
-      localStorage.removeItem("loggedInUser");
-      location.reload();
-    });
-
-    // Cart count
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    document.getElementById("cartCount").textContent = cart.length;
   </script>
+
+  <!-- <script src="auth.js"></script> -->
 </body>
+
 </html>

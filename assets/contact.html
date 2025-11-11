@@ -1,60 +1,64 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Contact Us - Demo E-commerce</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact Us - Demo E-commerce</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 </head>
+
 <body>
-<!-- Navbar -->
-<div class="bg-primary text-white text-center py-2">
-  Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%!
-  <a href="#" class="text-white text-decoration-underline">Shop Now</a>
-</div>
-<nav class="navbar navbar-expand-lg bg-light border-bottom">
-  <div class="container">
-    <a class="navbar-brand" href="index.html">E-commerce</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navMain">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
-        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-        <li class="nav-item"><a class="nav-link active" href="contact.html">Contact</a></li>
-      </ul>
-      <div class="d-flex align-items-center">
-        <a id="cartLink" class="me-3" href="cart.html"><i class="bi bi-cart"></i> Cart <span id="cartCount" class="badge bg-danger">0</span></a>
-        <a id="loginBtn" class="btn btn-light btn-sm me-2" href="login.html">Log in</a>
-        <a id="logoutBtn" class="btn btn-danger btn-sm" href="#">Log out</a>
-        <span id="usernameDisplay" class="ms-2 fw-bold"></span>
+  <!-- Navbar -->
+  <div class="bg-primary text-white text-center py-2">
+    Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%!
+    <a href="#" class="text-white text-decoration-underline">Shop Now</a>
+  </div>
+  <nav class="navbar navbar-expand-lg bg-light border-bottom">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">E-commerce</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMain">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link active" href="contact.html">Contact</a></li>
+        </ul>
+        <div class="d-flex align-items-center">
+          <a id="cartLink" class="me-3" href="cart.html"><i class="bi bi-cart"></i> Cart <span id="cartCount"
+              class="badge bg-danger">0</span></a>
+          <a id="loginBtn" class="btn btn-light btn-sm me-2" href="login.html">Log in</a>
+          <a id="logoutBtn" class="btn btn-danger btn-sm" href="#">Log out</a>
+          <span id="usernameDisplay" class="ms-2 fw-bold"></span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container py-5">
+    <h2 class="mb-4 text-center">Contact Us</h2>
+    <div class="row g-4">
+      <div class="col-md-5">
+        <h5>Support</h5>
+        <p>Email: support@example.com</p>
+        <p>Phone: +123-456-7890</p>
+      </div>
+      <div class="col-md-7">
+        <form id="contactForm">
+          <div class="mb-3"><input type="text" class="form-control" placeholder="Your Name" required></div>
+          <div class="mb-3"><input type="email" class="form-control" placeholder="Your Email" required></div>
+          <div class="mb-3"><input type="tel" class="form-control" placeholder="Your Phone" required></div>
+          <div class="mb-3"><textarea class="form-control" placeholder="Your Message" rows="4" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
       </div>
     </div>
   </div>
-</nav>
-
-<div class="container py-5">
-  <h2 class="mb-4 text-center">Contact Us</h2>
-  <div class="row g-4">
-    <div class="col-md-5">
-      <h5>Support</h5>
-      <p>Email: support@example.com</p>
-      <p>Phone: +123-456-7890</p>
-    </div>
-    <div class="col-md-7">
-      <form id="contactForm">
-        <div class="mb-3"><input type="text" class="form-control" placeholder="Your Name" required></div>
-        <div class="mb-3"><input type="email" class="form-control" placeholder="Your Email" required></div>
-        <div class="mb-3"><input type="tel" class="form-control" placeholder="Your Phone" required></div>
-        <div class="mb-3"><textarea class="form-control" placeholder="Your Message" rows="4" required></textarea></div>
-        <button type="submit" class="btn btn-primary">Send Message</button>
-      </form>
-    </div>
-  </div>
-</div>
 
   <!-- Footer (common for all pages) -->
   <footer class="mt-5 text-white bg-dark">
@@ -118,31 +122,50 @@
     </div>
   </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-  const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
-  const loginBtn = document.getElementById("loginBtn");
-  const logoutBtn = document.getElementById("logoutBtn");
-  const usernameDisplay = document.getElementById("usernameDisplay");
-  if(loggedInUser){
-    loginBtn.style.display = "none";
-    logoutBtn.style.display = "inline-block";
-    usernameDisplay.textContent = loggedInUser.username;
-  }
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Login durumunu kontrol et
+    const body = JSON.parse(localStorage.getItem("token"));
+    const loginBtn = document.getElementById("loginBtn");
+    const logoutBtn = document.getElementById("logoutBtn");
+    const usernameDisplay = document.getElementById("usernameDisplay");
 
-  logoutBtn.addEventListener("click", ()=>{
-    localStorage.removeItem("loggedInUser");
-    location.reload();
-  });
+    if (body && body.username) {
+      // Giriş yapmış kullanıcı
+      loginBtn.style.display = "none";
+      logoutBtn.style.display = "inline-block";
+      usernameDisplay.textContent = body.username;
+    } else {
+      // Giriş yapılmamışsa
+      loginBtn.style.display = "inline-block";
+      logoutBtn.style.display = "none";
+      usernameDisplay.textContent = "";
+    }
 
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  document.getElementById("cartCount").textContent = cart.length;
+    // Logout işlemi
+    logoutBtn.addEventListener("click", () => {
+      localStorage.removeItem("token");
+      alert("Logged out successfully!");
+      location.href = "login.html";
+    });
 
-  document.getElementById("contactForm").addEventListener("submit", e=>{
-    e.preventDefault();
-    alert("Message sent successfully!");
-    e.target.reset();
-  });
-</script>
+    // Cart sayısı
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const cartCount = document.getElementById("cartCount");
+    if (cartCount) cartCount.textContent = cart.length;
+
+    // Contact sayfasında form varsa, çalıştır
+    const contactForm = document.getElementById("contactForm");
+    if (contactForm) {
+      contactForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        alert("Message sent successfully!");
+        e.target.reset();
+      });
+    }
+  </script>
+
+  <script src="./script.js"></script>
 </body>
+
 </html>
