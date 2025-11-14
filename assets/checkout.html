@@ -182,7 +182,7 @@
         const responseData = await res.json();
         alert("✅ Order placed successfully! Order ID: " + (responseData.id || "N/A"));
         localStorage.removeItem("cart");
-        window.location.href = "index.html";
+        window.location.href = "orderdetails.html?id=" + (responseData.id || "");
 
       } catch (error) {
         console.error("Checkout error:", error);
