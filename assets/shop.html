@@ -34,6 +34,11 @@
     .rating i {
       color: gold;
     }
+
+    .product-card img {
+      height: 200px;
+      object-fit: cover;
+    }
   </style>
 </head>
 
@@ -324,10 +329,20 @@
       fetchProductsFromAPI();
     });
 
+    function sortProducts() {
+      if (activeSort === "low") {
+        products.sort((a, b) => a.price - b.price);
+      }
+      else if (activeSort === "high") {
+        products.sort((a, b) => b.price - a.price);
+      }
+    }
+
     sortSelect.addEventListener("change", e => {
-      const v = e.target.value;
-      activeSort = v === "low" ? "priceAsc" : v === "high" ? "priceDesc" : "";
-      fetchProductsFromAPI();
+      activeSort = e.target.value;
+
+      sortProducts();
+      renderProducts();
     });
 
     // ⭐ INIT
